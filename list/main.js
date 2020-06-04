@@ -71,7 +71,7 @@ $("tr th").dblclick(function () {
 
 window.addEventListener('keydown', function (e) {
 	if (e.key === "j"){
-		BSmode=!BSmode,barn.set("setting_BSmode",BSmode),BSmode?(alert("BSmode activated\nRefreshing..."),location.reload()):(alert("BSmode deactivated\nRefreshing..."),barn.set('sort_sort', ""),location.reload());
+		BSmode=!BSmode,barn.set("setting_BSmode",BSmode),BSmode?(alert("BrainStorm07 mode activated\nRefreshing..."),location.reload()):(alert("BSmode deactivated\nRefreshing..."),barn.set('sort_sort', ""),location.reload());
 	}
     if (e.keyCode === 13) alert("Coded by StoneIncarnate!"); // enter
     if (e.keyCode === 27) refreshData(); // esc	
