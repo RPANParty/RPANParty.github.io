@@ -1,54 +1,50 @@
-<!DOCTYPE html>
-<html  >
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
- <title>RPAN Mod Club</title>
-    <link rel="shortcut icon" href="https://i.imgur.com/VFigxPM.png" type="image/x-icon">
-    <meta property="og:title" content="RPAN Mod Club">
-    <meta property="og:image" content="https://i.imgur.com/VFigxPM.png">
-    <meta property="og:description" content="Super cool club">
-    <meta property="og:theme-color" content="#2bff00">
-    <meta property="theme-color" content="#2bff00">
+<!DOCTYPE html><html><head><meta charset="utf-8">
 
-  
-  
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:700,400&subset=cyrillic,latin,greek,vietnamese">
-  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/animatecss/animate.min.css">
-  <link rel="stylesheet" href="assets/mobirise/css/style.css">
-  <link rel="preload" as="style" href="assets/mobirise/css/mbr-additional.css"><link rel="stylesheet" href="assets/mobirise/css/mbr-additional.css" type="text/css">
-  
-  
-  
-</head>
-<body>
-  <section class="mbr-box mbr-section mbr-section--relative mbr-section--fixed-size mbr-section--full-height mbr-section--bg-adapted" id="header4-NaN" data-bg-video="https://www.youtube.com/embed/lRTtMcx6rSM?rel=0&amp;amp;showinfo=0&amp;autoplay=0&amp;loop=0" data-rv-view="5">
-    <div class="mbr-box__magnet mbr-box__magnet--sm-padding mbr-box__magnet--center-center">
-        <div class="mbr-overlay" style="opacity: 0.5; background-color: rgb(34, 34, 34);"></div>
-        <div class="mbr-box__container mbr-section__container container">
-            <div class="mbr-box mbr-box--stretched"><div class="mbr-box__magnet mbr-box__magnet--center-center">
-                <div class="row"><div class=" col-sm-8 col-sm-offset-2">
-                    <div class="mbr-hero animated fadeInUp">
-                        <h1 class="mbr-hero__text">RPAN MOD CLUB</h1>
-                        <p class="mbr-hero__subtext">No Brians here. &gt;:C</p>
-                    </div>
-                    <div class="mbr-buttons btn-inverse mbr-buttons--center"><a class="mbr-buttons__btn btn btn-lg btn-danger animated fadeInUp delay" href="https://www.reddit.com/r/pan/wiki/index" target="_blank">WIKI</a> <a class="mbr-buttons__btn btn btn-lg btn-default animated fadeInUp delay" href="https://docs.google.com/document/d/1lfczllXg7FCTX6lR9rLLjvAXjSM0tPa7ivsB8F6gTmI/edit" target="_blank">GUIDE</a></div>
-                </div></div>
-            </div></div>
-        </div>
-        
-    </div>
-</section>
+   <title>RPAN Lister</title>
+      <script src="libs/jquery.min.js"></script>
+      <script src="libs/lodash.min.js"></script>
+	  <script src="libs/barn.min.js"></script>
+	  <meta content="A small tool that lists all the current streams on Reddit Public Access Network" property="og:description">
+	  <link rel="icon" href="favicon.png">
+	  
+      <link rel="stylesheet" type="text/css" href="css/main.css">
+      <script src="js/main.min.js" defer='defer'></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-166723802-1"></script>
+	  <script>
+       window.dataLayer = window.dataLayer || [];
+       function gtag(){dataLayer.push(arguments);}
+         gtag('js', new Date());
+       gtag('config', 'UA-166723802-1');
+      </script>
+   </head>
 
+   <body>
+   <div class="page">
+   <div class="move_after">
+      <table id="resulttable">
+         <thead>
+            <tr>		
+			<th><a>#</a></th>
+               <th sortby="title"><a>Stream</a></th>
+			   <th sortby="subreddit"><a>Subreddit</a></th>	
+			   <th sortby="username"><a>Username</a></th>	
+			   <th sortby="contviews"><a>Viewers</a></th>				   
+			   <th sortby="upvotes"><a>Upvotes</a></th>
+			   <th sortby="downvotes"><a>Downvotes</a></th>
+			   <th sortby="timeon"><a>On for</a></th>
+               <th sortby="timeleft"><a>Time Left</a></th>
+            </tr>
+         </thead>
+         <tbody id="tableFLIP"></tbody>
+      </table><br>  
+   </div>
+   <div class="centered"><a onclick="refreshData()" class="button1">Refresh</a>
+<a href="settings.html" class="button1">Settings</a></div>
+   </div>
+   
+   <ul id="cust-menu"class='custom-menu'>
 
-  <section class="engine"><a href="https://mobirise.info/i">free website creation software</a></section><script src="assets/web/assets/jquery/jquery.min.js"></script>
-  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-  <script src="assets/smooth-scroll/smooth-scroll.js"></script>
-  <script src="assets/jquery-mb-ytplayer/jquery.mb.ytplayer.min.js"></script>
-  <script src="assets/mobirise/js/script.js"></script>
-  
-  
+	</ul>
+   
 </body>
 </html>
