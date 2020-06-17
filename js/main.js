@@ -4,6 +4,30 @@ checkdarkmode();
 checkar();
 barn.condense();
 
+function getCookiestate(){
+ return new Promise(function(resolve, reject) {
+var cookie = barn.get("cookieconsent");	
+	if ((cookie !== null)){
+		resolve(cookie);
+	} else{
+		setTimeout(function () {
+        $("#cookieform1").fadeIn(1000);
+     }, 2000);
+    $("#cookieform1 .allowbtn").click(function() {
+        $("#cookieform1").fadeOut(200);
+		barn.set("cookieconsent",true);
+		resolve(true);
+    });  
+	  $("#cookieform1 .closebtn").click(function() {
+        $("#cookieform1").fadeOut(200);
+		barn.set("cookieconsent",false);
+		      resolve(false);
+
+    });
+	}	
+	 });
+}
+
 function checkdarkmode(){
 $("html").toggleClass("darkmode", barn.get("setting_darkmode") || false);
 }
@@ -32,7 +56,7 @@ var isAsc = false || barn.get('sort_isAsc');
 var sortindex = -1;
 var Elemindex = 0 || barn.get('sort_Elemindex');
 
-BSmode&&$("#resulttable thead tr").html("<th>#</th><th sortby=\"title\"><a>Stream</a></th><th sortby=\"subreddit\"><a>Subreddit</a></th><th sortby=\"username\"><a>Username</a></th>\t<th sortby=\"contviews\"><a>Viewers</a></th><th sortby=\"upvotes\"><a>Upvotes</a></th><th sortby=\"downvotes\"><a>Downvotes</a></th><th sortby=\"comments\"><a>Comments</a></th><th sortby=\"timeon\"><a>On for</a></th><th sortby=\"timeleft\"><a>Time Left</a></th></tr>");
+BSmode&&$('#resulttable').find('thead tr th:nth-child(7)').after('<th sortby="comments"><a>Comments</a></th>');
 
 if (sort !== "" && Elemindex > 0) {
     let elm = $("tr th");
@@ -87,7 +111,8 @@ window.addEventListener('keydown', function (e) {
 	}
     if (e.keyCode === 13) alert("Coded by StoneIncarnate!"); // enter
     if (e.keyCode === 27) refreshData(); // esc	
-    if ((e.ctrlKey || e.metaKey) && e.keyCode == 88) console.log(`DEBUG VALUES:\nHighlighted users: ${barn.smembers('highlitUsers')}\nHidden users: ${(barn.smembers('hiddenUsers') || "none")}\nSort: ${barn.get('sort_sort')}\nisAsc: ${barn.get('sort_isAsc')}\nElemindex: ${barn.get('sort_Elemindex')}`);
+    if ((e.ctrlKey || e.metaKey) && e.keyCode == 88) console.log(
+	`DEBUG VALUES:\nHighlighted users: ${barn.smembers('highlitUsers') || "none"}\nHidden users: ${(barn.smembers('hiddenUsers') || "none")}\nHidden subs: ${(barn.smembers('hiddenSubs') || "none")}\nSort: ${barn.get('sort_sort')}\nisAsc: ${barn.get('sort_isAsc')}\nElemindex: ${barn.get('sort_Elemindex')}\nBSmode: ${barn.get('setting_BSmode')}\nDarkmode: ${barn.get('setting_darkmode')}\nAuto refresh: ${barn.get('setting_refresh')}\nRefresh interval: ${barn.get('setting_interval')}\n`);
 });
 
 function getList(index) {
@@ -213,13 +238,10 @@ function listStreams(sort = 'none', isAsc = true) {
     $("#tableFLIP").empty();
 
     $.each(obj, function (index, item) {		
-        var markup = "";
-		if (BSmode) {	
-		markup = `<tr class="result${item.highlight?' marked"':""}"><td>${index+1}</td><td data_value="streamIDhere" data_menu="stream"><a title="${item.title}"  onclick="openTab('${item.link}');">${item.title.TrimToLen(50)}</a></td><td data_value ="${item.subreddit}" data_menu="sub">r/${item.subreddit}</td><td data_value = "${item.username}" data_menu="${item.highlight?"user2":"user"}"><a onclick="openTab('https://www.reddit.com/user/${item.username}');">u/${item.username}</a></td><td>${item.contviews}</td><td>${item.upvotes}</td><td>${item.downvotes}</td><td sortby="comments">${item.comments}</td><td>${formatTime(item.timeon)}</td><td>${formatTime(item.timeleft)}</td></tr>`;
-		}
-		else{
-		markup = `<tr class="result${item.highlight?' marked"':""}"><td>${index+1}</td><td data_value="" data_menu="stream"><a title="${item.title}"  onclick="openTab('${item.link}');">${item.title.TrimToLen(50)}</a></td><td data_value ="${item.subreddit}" data_menu="sub">r/${item.subreddit}</td><td data_value = "${item.username}" data_menu="${item.highlight?"user2":"user"}"><a onclick="openTab('https://www.reddit.com/user/${item.username}');">u/${item.username}</a></td><td>${item.contviews}</td><td>${item.upvotes}</td><td>${item.downvotes}</td><td>${formatTime(item.timeon)}</td><td>${formatTime(item.timeleft)}</td></tr>`;
-		}
+        var bsmodestr = BSmode?`<td>${item.comments}</td>`:'';
+
+		var markup = `<tr class="result${item.highlight?' marked"':""}"><td>${index+1}</td><td data_menu="stream"><a title="${item.title}"  onclick="openTab('${item.link}');">${item.title.TrimToLen(50)}</a></td><td data_value ="${item.subreddit}" data_menu="sub">r/${item.subreddit}</td><td data_value = "${item.username}" data_menu="${item.highlight?"user2":"user"}"><a onclick="openTab('https://www.reddit.com/user/${item.username}');">u/${item.username}</a></td><td>${item.contviews}</td><td>${item.upvotes}</td><td>${item.downvotes}</td>${bsmodestr}<td>${formatTime(item.timeon)}</td><td>${formatTime(item.timeleft)}</td></tr>`;
+
         $("table tbody").append(markup);
     });
 
